@@ -11,7 +11,7 @@ from bottle import run, route, get, post, response, request, jinja2_view as view
 from PIL import Image
 
 from brother_ql.devicedependent import models, label_type_specs, label_sizes
-from brother_ql.devicedependent import ENDLESS_LABEL, DIE_CUT_LABEL, ROUND_DIE_CUT_LABEL
+from brother_ql.devicedependent import ENDLESS_LABEL, DIE_CUT_LABEL, ROUND_DIE_CUT_LABEL, PTOUCH_ENDLESS_LABEL
 from brother_ql import BrotherQLRaster, create_label
 from brother_ql.backends import backend_factory, guess_backend
 
@@ -175,9 +175,15 @@ def print_image():
         rotate = 0 if context['orientation'] == 'standard' else 90
     elif context['kind'] in (ROUND_DIE_CUT_LABEL, DIE_CUT_LABEL):
         rotate = 'auto'
+    elif context['kind'] == PTOUCH_ENDLESS_LABEL:
+        rotate = 90 if context['orientation'] == 'standard' else 0
+
+    compress = False
+    if context['kind'] == PTOUCH_ENDLESS_LABEL:
+        compress = True
 
     qlr = BrotherQLRaster(CONFIG['PRINTER']['MODEL'])
-    create_label(qlr, im, context['label_size'], cut=True, red=True if "red" in context['label_size'] else False, rotate=rotate)
+    create_label(qlr, im, context['label_size'], cut=True, red=True if "red" in context['label_size'] else False, rotate=rotate, compress=compress)
 
     if not DEBUG:
         try:
