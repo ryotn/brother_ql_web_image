@@ -1,4 +1,4 @@
-PIL
+pillow
 brother_ql
 bottle
 jinja2
