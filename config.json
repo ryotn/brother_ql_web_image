@@ -1,0 +1,20 @@
+{
+  "SERVER": {
+    "PORT": 8014,
+    "HOST": "",
+    "LOGLEVEL": "WARNING"
+  },
+  "PRINTER": {
+    "MODEL": "PT-P750W",
+    "PRINTER": "file:///dev/usb/lp0"
+  },
+  "LABEL": {
+    "DEFAULT_SIZE": "pt12",
+    "DEFAULT_ORIENTATION": "standard"
+  },
+  "WEBSITE": {
+    "HTML_TITLE": "Label Designer",
+    "PAGE_TITLE": "Brother QL Label Designer",
+    "PAGE_HEADLINE": "Design your label and print it…"
+  }
+}
